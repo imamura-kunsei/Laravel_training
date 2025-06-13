@@ -13,19 +13,24 @@ class TaskController extends Controller
     public function index (Request $get)
     {
         $selected_status = 'all';
+        $selected_sort = 0;
         $user_id = Auth::id();
-        // $tasks = Task::where('user_id', $user_id)->orderBy('due_date', 'asc')->get();
         $query = Task::query();
         $query->where('user_id', $user_id);
         if (isset($get->status) && $get->status != 'all') {
             $query->where('status', $get->status);
             $selected_status = $get->status;
         }
-        $query->orderBy('due_date', 'asc');
+        if ($get->sort == 1) {
+            $query->orderBy('due_date', 'desc');
+            $selected_sort = $get->sort;
+        }else{
+            $query->orderBy('due_date', 'asc');
+        }
         $tasks = $query->paginate(3);
         $status = Task::STATUS;
 
-        return view('index', compact('tasks', 'status', 'selected_status'));
+        return view('index', compact('tasks', 'status', 'selected_status', 'selected_sort'));
     }
 
     public function get_add ()

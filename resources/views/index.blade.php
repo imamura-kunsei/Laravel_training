@@ -13,6 +13,9 @@
 	<h1>タスク一覧</h1>
 	<h2 id="message"></h2>
 	<form>
+		<div>
+			<label for="due_date" class="form-check-label">ステータス</label>
+		</div>
 		<div class="form-check form-check-inline">
 			<label class="form-check-label" for="all"><input class="form-check-input" type="radio" value="all" id="all" name="status" {{ $selected_status == 'all' ? 'checked' : '' }} />全て</label>
 		</div>
@@ -24,6 +27,15 @@
 		</div>
 		<div class="form-check form-check-inline">
 			<label class="form-check-label" for="completion"><input class="form-check-input" type="radio" value="2" id="completion" name="status" {{ $selected_status == 2 ? 'checked' : '' }}/>完了</label>
+		</div>
+		<div>
+			<label for="due_date" class="form-check-label">並び替え（期限）</label>
+		</div>
+		<div class="form-check form-check-inline">
+			<label class="form-check-label" for="asc"><input class="form-check-input" type="radio" value="0" id="asc" name="sort" {{ $selected_sort == 0 ? 'checked' : '' }} />昇順（古→新）</label>
+		</div>
+		<div class="form-check form-check-inline">
+			<label class="form-check-label" for="desc"><input class="form-check-input" type="radio" value="1" id="desc" name="sort" {{ $selected_sort == 1 ? 'checked' : '' }} />降順（新→古）</label>
 		</div>
 		<div>
 			<button type="submit" class="btn btn-secondary">検索</button>
